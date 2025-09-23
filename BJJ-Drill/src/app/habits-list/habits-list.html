@@ -1,0 +1,16 @@
+@if(stats$ | async; as s) {
+<div>{{ s.completed }} / {{ s.total }} ({{ s.percent }}%)</div>
+}
+
+<label for="newHabit">New Habit</label>
+<input type="text" [formControl]="newHabit" name="newHabit" id="" />
+<button (click)="addNewHabit()">Add</button>
+
+@for (item of (habitList$ | async); track item.title) {
+<div>
+  <h2>{{ item.title }}</h2>
+  <p>{{ item.done ? 'Done' : 'Not Done' }}</p>
+  <button (click)="toggleDone(item.id)">Toggle</button>
+  <button (click)="removeHabit(item.id)">Remove</button>
+</div>
+}
